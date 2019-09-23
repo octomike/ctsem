@@ -67,8 +67,8 @@ matrix:
       env: CC="clang" CXX14="clang++ -arch x86_64 -ftemplate-depth-256" CXX14FLAGS="-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-unknown-pragmas"
 
 before_install:
-  - 'mkdir ~/.R && env >> ~/.R/Makevars' # slight overkill
-  - "[[ 'TRAVIS_OS_NAME' = 'linux' ]] && sudo locale-gen en_US.UTF-8"
+  - mkdir ~/.R && env >> ~/.R/Makevars # slight overkill
+  - "[[ \"$TRAVIS_OS_NAME\" = 'linux' ]] && sudo locale-gen en_US.UTF-8"
 
 script:
   - travis_wait 30 R CMD build --no-build-vignettes .
