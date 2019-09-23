@@ -21,11 +21,19 @@ env:
 
 r_binary_packages:
   - rpf
-  #- rstantools
-  #- data.table
+  - data.table
+  - mize
+  - c0de
+  - DEoptim
+  - ggally
+  - loo
+  - progress
+  - reshape
+  - matrixstats
+  - checkmate
+  - hms
   - jsonlite
   #- Rcpp
-  #- cOde
   - remotes
   #- Deriv
   #- mvtnorm
@@ -33,9 +41,6 @@ r_binary_packages:
   - testthat
   - devtools
   - shiny
-  #- mize
-  #- StanHeaders
-  #- OpenMx
 
 addons:
   apt:
@@ -44,7 +49,6 @@ addons:
     packages:
       - g++-7
       - gfortran-7
-      - r-cran-rstan
 
 matrix:
   include:
