@@ -71,6 +71,6 @@ before_install:
   - "[[ \"$TRAVIS_OS_NAME\" = 'linux' ]] && sudo locale-gen en_US.UTF-8 || true"
 
 script:
-  - travis_wait 30 R CMD build --no-build-vignettes .
-  - travis_wait 30 R CMD check --no-vignettes --as-cran  *tar.gz
+  - R CMD build --no-build-vignettes .
+  - R CMD check --no-vignettes --as-cran  *tar.gz
 
