@@ -17,6 +17,7 @@ env:
     - _R_CHECK_CRAN_INCOMING_=true
     - _R_CHECK_FORCE_SUGGESTS_=false
     - MAKEFLAGS="-j 2"
+    - LC_ALL="en_US.UTF-8"
 
 r_binary_packages:
   - rpf
@@ -50,7 +51,7 @@ matrix:
     - os: linux
       dist: trusty
       r: release
-      env: CC="gcc-7" CXX="g++-7" CXX14="g++-7 -fPIC -std=c++1y" CXX14FLAGS="-mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations -Wno-attributes -O3" LC_ALL="en_US.UTF-8"
+      env: CC="gcc-7" CXX="g++-7" CXX14="g++-7 -fPIC -std=c++1y" CXX14FLAGS="-mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations -Wno-attributes -O3"
     #- os: linux
     #  dist: trusty
     #  r: devel
@@ -59,12 +60,11 @@ matrix:
       osx_image: xcode10
       r: release
       fortran: false
-      env: CC="clang" CXX14="clang++ -arch x86_64 -ftemplate-depth-256" CXX14FLAGS="-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-unknown-pragmas" LC_ALL="en_US.UTF-8"
+      env: CC="clang" CXX14="clang++ -arch x86_64 -ftemplate-depth-256" CXX14FLAGS="-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-unknown-pragmas"
 
 before_install:
   - mkdir ~/.R && env >> ~/.R/Makevars # slight overkill
-  - cat ~/.R/Makevars
-  - sudo locale-gen en_US.UTF-8
+  - [[ "TRAVIS_OS_NAME" = "linux" ]] && sudo locale-gen en_US.UTF-8
 
 script:
   - travis_wait 30 R CMD build --no-build-vignettes .
