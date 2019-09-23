@@ -24,23 +24,23 @@ r_binary_packages:
   - rpf
   - data.table
   - mize
-  - code
-  - deoptim
-  - ggally
   - loo
   - progress
   - reshape
-  - matrixstats
   - checkmate
   - hms
   - inline
-  - gridextra
   - jsonlite
   - remotes
   - knitr
   - testthat
   - devtools
   - shiny
+  - code
+  - deoptim
+  - ggally
+  - gridextra
+  - matrixstats
 
 addons:
   apt:
@@ -65,6 +65,27 @@ matrix:
       r: release
       fortran: false
       env: CC="clang" CXX14="clang++ -arch x86_64 -ftemplate-depth-256" CXX14FLAGS="-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-unknown-pragmas"
+      r_binary_packages:
+        - rpf
+        - data.table
+        - mize
+        - loo
+        - progress
+        - reshape
+        - checkmate
+        - hms
+        - inline
+        - jsonlite
+        - remotes
+        - knitr
+        - testthat
+        - devtools
+        - shiny
+        - c0de
+        - DEoptim
+        - GGally
+        - gridExtra
+        - matrixStats
 
 before_install:
   - mkdir ~/.R && env >> ~/.R/Makevars # slight overkill
