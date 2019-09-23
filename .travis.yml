@@ -19,12 +19,13 @@ env:
     - MAKEFLAGS="-j 2"
     - LC_ALL="en_US.UTF-8"
 
+# it looks like as if these packages are just prefixed with `r-cran-`
 r_binary_packages:
   - rpf
   - data.table
   - mize
-  - c0de
-  - DEoptim
+  - code
+  - deoptim
   - ggally
   - loo
   - progress
