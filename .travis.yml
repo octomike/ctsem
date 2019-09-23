@@ -33,11 +33,10 @@ r_binary_packages:
   - matrixstats
   - checkmate
   - hms
+  - inline
+  - gridextra
   - jsonlite
-  #- Rcpp
   - remotes
-  #- Deriv
-  #- mvtnorm
   - knitr
   - testthat
   - devtools
@@ -69,7 +68,7 @@ matrix:
 
 before_install:
   - mkdir ~/.R && env >> ~/.R/Makevars # slight overkill
-  - "[[ \"$TRAVIS_OS_NAME\" = 'linux' ]] && sudo locale-gen en_US.UTF-8"
+  - "[[ \"$TRAVIS_OS_NAME\" = 'linux' ]] && sudo locale-gen en_US.UTF-8 || true"
 
 script:
   - travis_wait 30 R CMD build --no-build-vignettes .
