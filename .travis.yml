@@ -3,9 +3,6 @@ sudo: true
 fortran: true
 #cache: packages
 
-r_check_args: "--no-vignettes"
-r_build_args: '--no-build-vignettes'
-use_devtools: true
 
 #repos:
 #  CRAN: https://cloud.r-project.org
@@ -65,4 +62,4 @@ before_install:
 
 script:
   - travis_wait 30 R CMD build --no-build-vignettes .
-  - travis_wait 30 R CMD check --no-build-vignettes --as-cran  *tar.gz
+  - travis_wait 30 R CMD check --no-vignettes --as-cran  *tar.gz
