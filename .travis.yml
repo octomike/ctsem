@@ -6,6 +6,10 @@ cache:
     - $TRAVIS_BUILD_DIR/packrat/lib
   packages: true
 
+# TODO
+# + build args, though os-matrix specific are considered non-portable
+# + default ASCII locale with UTF-8 content in package
+warnings_are_errors: false
 
 #repos:
 #  CRAN: https://cloud.r-project.org
