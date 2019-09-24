@@ -1,10 +1,8 @@
 language: r
 sudo: false
-#cache: packages
 
 # TODO
 # + build args, though os-matrix specific are considered non-portable
-# + default ASCII locale with UTF-8 content in package
 warnings_are_errors: false
 
 #repos:
@@ -66,10 +64,10 @@ matrix:
       dist: trusty
       r: release
       env: CC="gcc-7" CXX="g++-7" CXX14="g++-7 -fPIC -std=c++1y" CXX14FLAGS="-mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations -Wno-attributes -O3"
-    #- os: linux
-    #  dist: trusty
-    #  r: devel
-    #  env: CC="gcc-7" CXX="g++-7" CXX14="g++-7 -fPIC -std=c++1y" CXX14FLAGS="-mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations -Wno-attributes -O3"
+    - os: linux
+      dist: trusty
+      r: devel
+      env: CC="gcc-7" CXX="g++-7" CXX14="g++-7 -fPIC -std=c++1y" CXX14FLAGS="-mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations -Wno-attributes -O3"
     - os: osx
       osx_image: xcode10
       r: release
@@ -88,4 +86,4 @@ before_install:
 
 script:
   - R CMD build --no-build-vignettes .
-  - travis_wait 30 R CMD check --no-vignettes --as-cran  *tar.gz
+  - travis_wait 30 R CMD check --no-vignettes --as-cran *tar.gz
