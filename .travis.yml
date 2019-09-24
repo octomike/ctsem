@@ -19,7 +19,17 @@ env:
     - MAKEFLAGS="-j 2"
     - LC_ALL="en_US.UTF-8"
 
-# it looks like as if these packages are just prefixed with `r-cran-`
+# Note that some names here are not equivalent with their CRAN names (cOde ->
+# code, ...) During package dependency check it will *still* try to update all
+# dependencies to their latest version. That's why OpenMX and others are not
+# listed here. Once the apt repo is using the most recent version, this list
+# can be amended. This list only makes sense for linux builds. The automatic
+# dependency check on linux will always build from source, which takes a very
+# long time. Preinstalling some packages, that are known to have matching
+# versions on CRAN and APT will speed up build time significantly.
+#
+# These packages are just prefixed with `r-cran-` and pulled with apt from
+# c2deb4u.
 r_binary_packages:
   - rpf
   - data.table
@@ -65,27 +75,11 @@ matrix:
       r: release
       fortran: false
       env: CC="clang" CXX14="clang++ -arch x86_64 -ftemplate-depth-256" CXX14FLAGS="-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-unknown-pragmas"
+      # Override this array to an empty value, because automatic dependency
+      # checks on MacOS will result in binary package download from CRAN
+      # anyway. Also, the names from c2deb4u are not consistent with the
+      # package names on CRAN (cOde vs code, DEoptim vs deoptim and so on..)
       r_binary_packages: []
-      #  - rpf
-      #  - data.table
-      #  - mize
-      #  - loo
-      #  - progress
-      #  - reshape
-      #  - checkmate
-      #  - hms
-      #  - inline
-      #  - jsonlite
-      #  - remotes
-      #  - knitr
-      #  - testthat
-      #  - devtools
-      #  - shiny
-      #  - cOde
-      #  - DEoptim
-      #  - GGally
-      #  - gridExtra
-      #  - matrixStats
 
 before_install:
   - mkdir ~/.R
@@ -94,5 +88,4 @@ before_install:
 
 script:
   - R CMD build --no-build-vignettes .
-  - R CMD check --no-vignettes --as-cran  *tar.gz || cat ${TRAVIS_BUILD_DIR}/ctsem.Rcheck/00install.out && exit 1
-
+  - travis_wait 30 R CMD check --no-vignettes --as-cran  *tar.gz
