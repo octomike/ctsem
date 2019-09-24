@@ -88,10 +88,11 @@ matrix:
         - matrixStats
 
 before_install:
-  - mkdir ~/.R && env >> ~/.R/Makevars # slight overkill
+  - mkdir ~/.R
+  - env | grep -e MAKEFLAGS -e CC -e CXX >> ~/.R/Makevars
   - "[[ \"$TRAVIS_OS_NAME\" = 'linux' ]] && sudo locale-gen en_US.UTF-8 || true"
 
 script:
   - R CMD build --no-build-vignettes .
-  - R CMD check --no-vignettes --as-cran  *tar.gz
+  - R CMD check --no-vignettes --as-cran  *tar.gz || cat ${TRAVIS_BUILD_DIR}/ctsem.Rcheck/00install.out && exit 1
 
