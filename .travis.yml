@@ -81,7 +81,7 @@ matrix:
         - testthat
         - devtools
         - shiny
-        - c0de
+        - cOde
         - DEoptim
         - GGally
         - gridExtra
