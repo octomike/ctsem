@@ -86,4 +86,7 @@ before_install:
 
 script:
   - R CMD build --no-build-vignettes .
-  - travis_wait 30 R CMD check --no-vignettes --as-cran *tar.gz
+  - travis_wait 30 R CMD check --no-vignettes --as-cran *tar.gz || true
+  - cat ctsem.Rcheck/00install.out
+  - cat ctsem.Rcheck/ctsem-Ex.Rout
+  - cat ctsem.Rcheck/tests/testthat.Rout
