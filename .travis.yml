@@ -92,7 +92,7 @@ script:
     travis_wait 30 R CMD check --no-vignettes --as-cran *tar.gz
   else
     Rscript -e "install.packages(list.files(pattern='ctsem.*tar.gz'))"
-    Rscript -e "library(devtools); devtools::test()"
+    travis_wait 30 Rscript -e "library(devtools); devtools::test()"
   fi
   #cat ctsem.Rcheck/00install.out*
   #cat ctsem.Rcheck/ctsem-Ex.Rout*
