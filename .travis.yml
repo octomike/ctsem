@@ -94,8 +94,9 @@ script:
   if [[ "$TRAVIS_PULL_REQUEST" != "false" ]] || [[ "$TRAVIS_BRANCH" = "master" ]] ; then
     travis_wait 60 R CMD check --no-vignettes --as-cran *tar.gz
   else
-    Rscript -e "install.packages(list.files(pattern='ctsem.*tar.gz'))"
-    travis_wait 60 Rscript -e "library(devtools); devtools::test()"
+    # Rscript -e "install.packages(list.files(pattern='ctsem.*tar.gz'))"
+    # travis_wait 60 Rscript -e "library(devtools); devtools::test()"
+    travis_wait 60 R CMD check --no-vignettes --as-cran *tar.gz
   fi
   #cat ctsem.Rcheck/00install.out*
   #cat ctsem.Rcheck/ctsem-Ex.Rout*
