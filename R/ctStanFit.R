@@ -1070,7 +1070,7 @@ ctStanFit<-function(datalong, ctstanmodel, stanmodeltext=NA, iter=1000, intovers
           # enable_random_init=TRUE,
           init_r=.1,
           init=staninits,
-          refresh=20,
+          refresh=ifelse(verbose, 20, 0),
           iter=iter,
           data = standata, chains = chains, control=control,
           cores=cores,
