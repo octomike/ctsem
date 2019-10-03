@@ -18,17 +18,16 @@ env:
     - MAKEFLAGS="-j 2"
     - LC_ALL="en_US.UTF-8"
 
-# Note that some names here are not equivalent with their CRAN names (cOde ->
-# code, ...) During package dependency check it will *still* try to update all
-# dependencies to their latest version. That's why OpenMX and others are not
-# listed here. Once the apt repo is using the most recent version, this list
-# can be amended. This list only makes sense for linux builds. The automatic
-# dependency check on linux will always build from source, which takes a very
-# long time. Preinstalling some packages, that are known to have matching
-# versions on CRAN and APT will speed up build time significantly.
-#
 # These packages are just prefixed with `r-cran-` and pulled with apt from
 # c2deb4u.
+# The automatic dependency check on linux will always build from source, which
+# takes a very long time. Preinstall packages to hopefully avoid that.
+# Note that some names here are not equivalent with their CRAN names (cOde ->
+# code, ...). During package dependency check it will *still* try to update all
+# dependencies to their latest version and rebuild everything that does not
+# have a corresponding binary package.
+# This list only works for linux builds as MacOS is pulling binary packages
+# from CRAN itself.
 r_binary_packages:
   - rpf
   - data.table
@@ -51,6 +50,9 @@ r_binary_packages:
   - gridextra
   - matrixstats
   - openmx
+  - rstan
+  - rstantools
+  - deriv
 
 addons:
   apt:
