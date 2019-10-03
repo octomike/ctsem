@@ -50,6 +50,7 @@ r_binary_packages:
   - ggally
   - gridextra
   - matrixstats
+  - openmx
 
 addons:
   apt:
@@ -62,23 +63,23 @@ addons:
 matrix:
   include:
     - os: linux
-      dist: trusty
+      dist: xenial
       r: release
       env: CC="gcc-7" CXX="g++-7" CXX14="g++-7 -fPIC -std=c++1y" CXX14FLAGS="-mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations -Wno-attributes -O3"
-    - os: linux
-      dist: trusty
-      r: devel
-      env: CC="gcc-7" CXX="g++-7" CXX14="g++-7 -fPIC -std=c++1y" CXX14FLAGS="-mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations -Wno-attributes -O3"
-    - os: osx
-      osx_image: xcode10
-      r: release
-      fortran: false
-      env: CC="clang" CXX14="clang++ -arch x86_64 -ftemplate-depth-256" CXX14FLAGS="-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-unknown-pragmas"
-      # Override this array to an empty value, because automatic dependency
-      # checks on MacOS will result in binary package download from CRAN
-      # anyway. Also, the names from c2deb4u are not consistent with the
-      # package names on CRAN (cOde vs code, DEoptim vs deoptim and so on..)
-      r_binary_packages: []
+   # - os: linux
+   #   dist: xenial
+   #   r: devel
+   #   env: CC="gcc-7" CXX="g++-7" CXX14="g++-7 -fPIC -std=c++1y" CXX14FLAGS="-mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations -Wno-attributes -O3"
+   # - os: osx
+   #   osx_image: xcode10
+   #   r: release
+   #   fortran: false
+   #   env: CC="clang" CXX14="clang++ -arch x86_64 -ftemplate-depth-256" CXX14FLAGS="-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-unknown-pragmas"
+   #   # Override this array to an empty value, because automatic dependency
+   #   # checks on MacOS will result in binary package download from CRAN
+   #   # anyway. Also, the names from c2deb4u are not consistent with the
+   #   # package names on CRAN (cOde vs code, DEoptim vs deoptim and so on..)
+   #   r_binary_packages: []
 
 before_install:
   - mkdir ~/.R
@@ -91,8 +92,9 @@ script:
   if [[ "$TRAVIS_PULL_REQUEST" != "false" ]] || [[ "$TRAVIS_BRANCH" = "master" ]] ; then
     travis_wait 30 R CMD check --no-vignettes --as-cran *tar.gz
   else
-    Rscript -e "install.packages(list.files(pattern='ctsem.*tar.gz'))"
-    travis_wait 30 Rscript -e "library(devtools); devtools::test()"
+    #Rscript -e "install.packages(list.files(pattern='ctsem.*tar.gz'))"
+    #travis_wait 30 Rscript -e "library(devtools); devtools::test()"
+    travis_wait 30 R CMD check --no-vignettes --as-cran *tar.gz
   fi
   #cat ctsem.Rcheck/00install.out*
   #cat ctsem.Rcheck/ctsem-Ex.Rout*
