@@ -6,10 +6,6 @@ cache: packages
 # + build args, though os-matrix specific are considered non-portable
 warnings_are_errors: false
 
-#repos:
-#  CRAN: https://cloud.r-project.org
-#  ropensci: http://packages.ropensci.org
-
 env:
   global:
     - R_MAX_NUM_DLLS=999
