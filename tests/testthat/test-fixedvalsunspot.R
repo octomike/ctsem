@@ -42,5 +42,3 @@ ssfit<-ctStanFit(datalong=datalong, ctstanmodel=sm, forcerecompile = T,
   chains=1,nopriors=F)
 
 }
-}
-
