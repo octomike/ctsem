@@ -35,7 +35,7 @@ Tpoints <- 7 #updated
 wide <- ctIntervalise(datawide = wide, Tpoints = Tpoints,
                       n.manifest = n.manifest)
 
-mltrait < -ctModel(Tpoints = Tpoints, n.latent = n.latent, n.manifest = n.manifest,
+mltrait <- ctModel(Tpoints = Tpoints, n.latent = n.latent, n.manifest = n.manifest,
                    LAMBDA = diag(1, n.manifest), TRAITVAR = "auto")
 
 mmtrait <- ctModel(Tpoints = Tpoints, n.latent = n.latent, n.manifest = n.manifest,
