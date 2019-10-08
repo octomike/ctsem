@@ -35,7 +35,4 @@ ssfit <- ctStanFit(datalong = datalong, ctstanmodel = sm, forcerecompile = T,
                    # nlcontrol=list(nldynamics=F, nlmeasurement=F,ukffull=1,ukfspread=1e-1),
                    chains = 1, nopriors = F)
 
-for (condi in 1:length(largs)) {
-    ssfit <- do.call(ctStanFit, largs[[condi]])
-}
 }
